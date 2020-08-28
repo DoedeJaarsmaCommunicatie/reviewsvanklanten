@@ -30,8 +30,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
     }
 
@@ -45,8 +43,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-
-        //
     }
 
     /**
@@ -72,9 +68,25 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
+        Route::prefix('api/v1/companies')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path('routes/api.php'));
+            ->name('api.v1.companies.')
+            ->group(base_path('routes/api/v1/companies.php'));
+
+//        Route::prefix('api/v1/companies')
+//            ->middleware('api')
+//            ->namespace($this->namespace)
+//            ->group(base_path('routes/api/v1/companies.php'));
+//
+//        Route::prefix('api/v1/companies')
+//            ->middleware('api')
+//            ->namespace($this->namespace)
+//            ->group(base_path('routes/api/v1/companies.php'));
+//
+//        Route::prefix('api/v1/companies')
+//            ->middleware('api')
+//            ->namespace($this->namespace)
+//            ->group(base_path('routes/api/v1/companies.php'));
     }
 }

@@ -50,12 +50,21 @@ class Companies extends Command
             $users = $this->ask('user id (separate with `,` for more than 1)');
             $users = explode(',', $users);
             array_map(function ($id) use ($company) {
-                if (User::whereId($id)->exists() && User::find($id)->canCreateBusiness()) {
+                if (!User::whereId($id)->exists()) {
+                    return;
+                }
+                if (User::find($id)->canCreateBusiness()) {
                     $company->users()->attach($id);
-                } elseif (!User::find($id)->canCreateBusiness()) {
+                } else {
                     $this->error('No more business for this user.');
                 }
             }, $users);
+        }
+
+        if ($company->users()->count() === 0) {
+            $company->forceDelete();
+            $this->error('Company deleted. No owners available');
+            return 0;
         }
 
         return $company->id;

@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Api\V1\Companies;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
+use App\Traits\requestFetchers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CompanyResource;
 
 class Fetch extends Controller
 {
+    use requestFetchers;
+
     public function __invoke(Request $request)
     {
         if ($this->hasRequestKey($request, $this->getUuidRequestKey())) {
@@ -43,20 +46,6 @@ class Fetch extends Controller
         }
 
         return CompanyResource::collection(Company::all());
-    }
-
-    protected function getRequestValueOnKey(Request $request, string $key)
-    {
-        if (!$this->hasRequestKey($request, $key)) {
-            return null;
-        }
-
-        return $request->get($key);
-    }
-
-    protected function hasRequestKey(Request $request, string $key): bool
-    {
-        return $request->has($key);
     }
 
     private function getUuidRequestKey(): string

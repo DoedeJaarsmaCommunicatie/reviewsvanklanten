@@ -26,6 +26,7 @@ class CompanyResource extends JsonResource
             'uuid' => $this->uuid,
             'description' => $this->description,
             'items' => PropertyResource::collection($this->property),
+            'owner' => $this->users
         ];
     }
 }
