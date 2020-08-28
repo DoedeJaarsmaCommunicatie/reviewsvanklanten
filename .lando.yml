@@ -1,0 +1,26 @@
+name: reviewsvanklanten
+recipe: laravel
+config:
+  webroot: public
+  php: 7.3
+  xdebug: false
+
+services:
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+    portforward: true
+
+  phpmyadmin:
+    type: phpmyadmin
+    portforward: true
+
+proxy:
+  phpmyadmin:
+    - pma-vmw-admin.lndo.site
+    - phpmyadmin-vmw-admin.lndo.site
+
+  mailhog:
+    - hog-vmw-admin.lndo.site
+    - mailhog-vmw-admin.lndo.site
