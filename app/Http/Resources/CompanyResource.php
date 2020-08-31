@@ -24,9 +24,29 @@ class CompanyResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'uuid' => $this->uuid,
-            'description' => $this->description,
-            'items' => PropertyResource::collection($this->property),
-            'owner' => $this->users
+            'description' => $this->when((bool) $this->description, $this->description),
+            $this->mergeWhen($this->reviews()->count() > 0, [
+                'reviews' => $this->reviews,
+                'review_count' => $this->reviews()->count(),
+            ]),
+        ];
+    }
+
+    public function with($request)
+    {
+        return [
+            'related' => [
+                'items' => PropertyResource::collection($this->property),
+                'owners' => UserResource::collection($this->users),
+            ],
+            'links' => [
+                'self' => route('api.v1.companies.single.id', $this->id),
+                'overview' => route('api.v1.companies.fetch'),
+                'create' => route('api.v1.companies.create'),
+                'patch' => [
+
+                ],
+            ]
         ];
     }
 }

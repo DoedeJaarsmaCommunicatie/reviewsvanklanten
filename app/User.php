@@ -115,16 +115,39 @@ class User extends Authenticatable implements MustVerifyEmail, ProvidesInvoiceIn
      */
     public function canCreateBusiness(): bool
     {
-        switch($this->subscriptions) {
-            case static::T_B_BASIC_YEARLY:
-                return $this->companies()->count() < 1;
-            case static::T_B_PLUS_YEARLY:
-                return $this->companies()->count() < 3;
-            case static::T_B_PRO_YEARLY:
-                return $this->companies()->count() < 10;
-            default:
-                return app()->environment('production') ? false : true; # Return true for testing purposes
+        if ($this->subscribedToPlan(self::T_B_BASIC_YEARLY)) {
+            return $this->companies()->count() < 1;
         }
+
+        if ($this->subscribedToPlan(static::T_B_PLUS_YEARLY)) {
+            return $this->companies()->count() < 3;
+        }
+
+        if ($this->subscribedToPlan(self::T_B_PRO_YEARLY)) {
+            return $this->companies()->count() < 10;
+        }
+
+        return app()->environment('production') ? false : true; # Return true for testing purposes
+    }
+
+    /**
+     * Check if products can still be added
+     *
+     * @return bool
+     */
+    public function hasPropertyAvailable(): bool
+    {
+        if ($this->subscribedToPlan(static::T_B_BASIC_YEARLY)) {
+            $total = 0;
+            foreach ($this->companies as $company) {
+                $total += $company->property->count();
+            }
+
+            return $total < 250;
+        }
+
+
+        return app()->environment('production') ? false : true; # Return true for testing purposes
     }
 
     public function companies(): BelongsToMany

@@ -31,4 +31,13 @@ class PropertyResource extends JsonResource
             'items' => PropertyResource::collection($this->property),
         ];
     }
+
+    public function with($request)
+    {
+        return [
+            'related' => [
+                'items' => PropertyResource::collection($this->property),
+            ]
+        ];
+    }
 }
