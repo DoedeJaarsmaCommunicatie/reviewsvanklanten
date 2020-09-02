@@ -1,0 +1,10 @@
+@use './base';
+
+table.striped {
+    @extend %base-table;
+
+    & tr:nth-of-type(even),
+    & thead {
+        @apply bg-primary-500 bg-opacity-25;
+    }
+}

@@ -1,8 +1,6 @@
 @use 'tailwindcss/base';
 @use 'tailwindcss/components';
 
-//@use "components" as *;
+@use "components" as *;
 
 @use 'tailwindcss/utilities';
-
-@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');

@@ -81,6 +81,8 @@ class User extends Authenticatable implements MustVerifyEmail, ProvidesInvoiceIn
     public const T_B_PLUS_YEARLY = 'plus-yearly';
     public const T_B_PRO_YEARLY = 'pro-yearly';
 
+    public const T_B_SUB_NAME = 'Reviews van Klanten subscription';
+
     /**
      * The attributes that are mass assignable.
      *

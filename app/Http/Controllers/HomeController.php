@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    /**
+     * @var User $user Authentication forced via middleware.
+     */
+    protected $user;
+
     /**
      * Create a new controller instance.
      *
@@ -19,10 +25,18 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Http\Response
      */
     public function index()
     {
-        return view('home');
+        $this->user = Auth::user();
+
+        return \Response::view(
+            'home',
+        [
+            'user' => $this->user,
+            'subscription_type' => $this->user->subscription(),
+            'companies' => $this->user->companies
+        ]);
     }
 }

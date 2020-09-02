@@ -18,9 +18,9 @@ services:
 
 proxy:
   phpmyadmin:
-    - pma-vmw-admin.lndo.site
-    - phpmyadmin-vmw-admin.lndo.site
+    - pma-reviewsvanklanten.lndo.site
+    - phpmyadmin-reviewsvanklanten.lndo.site
 
   mailhog:
-    - hog-vmw-admin.lndo.site
-    - mailhog-vmw-admin.lndo.site
+    - hog-reviewsvanklanten.lndo.site
+    - mailhog-reviewsvanklanten.lndo.site

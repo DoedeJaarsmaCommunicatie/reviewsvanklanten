@@ -20,3 +20,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('subscriptions')->group(static function() {
+    Route::post('/subscribe', 'Web\Subscribe\NewSubscription@index')->name('subscriptions.new');
+});

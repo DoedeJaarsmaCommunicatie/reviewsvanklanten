@@ -1,23 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
+    <div class="container mx-auto">
+        @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
             </div>
-        </div>
+        @endif
+
+        @if (!$subscription_type)
+            <form action="{{ route('subscriptions.new') }}" method="POST">
+                @csrf
+                @method('post')
+                <button type="submit" class="pill bg-primary-800 text-black">Subscribe now</button>
+            </form>
+        @endif
+
+        @includeWhen($companies->count() > 0, 'partials.companies.list')
     </div>
-</div>
 @endsection

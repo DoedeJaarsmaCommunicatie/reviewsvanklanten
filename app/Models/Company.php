@@ -49,7 +49,17 @@ class Company extends Model
         return $this->belongsToMany(User::class);
     }
 
+    /**
+     * @return MorphMany
+     *
+     * @see Company::properties()
+     */
     public function property(): MorphMany
+    {
+        return $this->properties();
+    }
+
+    public function properties(): MorphMany
     {
         return $this->morphMany(Property::class, 'parent');
     }

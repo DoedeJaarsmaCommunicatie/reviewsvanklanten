@@ -1,0 +1,13 @@
+%base-table {
+    @apply w-full text-left;
+
+    td,
+    th {
+        @apply p-2;
+    }
+}
+table.table {
+    @extend %base-table;
+
+
+}

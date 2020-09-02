@@ -24,19 +24,43 @@
     @stack('header/styles')
 </head>
 <body>
-<header class="border-b py-4 shadow-xl">
+<header class="py-4 bg-primary">
+    <div class="container mx-auto lg:flex">
+        <nav class="ml-auto top-nav">
+            @guest
+                <a href="{{ route('login') }}" class="mr-2">{{ __('Login') }}</a>
+                <a href="{{ route('register') }}" class="pill bg-black text-white">{{ __('Register') }}</a>
+            @endguest
+
+            @auth
+                <a href="{{ route('logout') }}" onclick="e => e.preventDefault; document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                        @csrf
+                    </form>
+                </a>
+                <a href="{{ route('home') }}" class="pill bg-black text-white ml-4">Dashboard</a>
+            @endauth
+        </nav>
+    </div>
+</header>
+<header class="bg-primary-800 py-4 shadow">
     <div class="container mx-auto lg:flex">
         <a class="'navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Reviews van klanten') }}
         </a>
 
         <nav class="navbar lg:ml-auto">
-
+            <a href="#" class="mr-4">Home</a>
+            <a href="#" class="mr-4">Voordelen</a>
+            <a href="#" class="mr-4">Tarieven</a>
+            <a href="#">Contact</a>
         </nav>
     </div>
 </header>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" hidden>
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -69,17 +93,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
                             </li>
                         @endguest
                     </ul>
