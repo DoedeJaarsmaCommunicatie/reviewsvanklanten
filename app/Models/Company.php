@@ -32,6 +32,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Review[] $reviews
  * @property-read int|null $reviews_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Property[] $properties
+ * @property-read int|null $properties_count
  */
 class Company extends Model
 {
@@ -43,6 +45,16 @@ class Company extends Model
     protected $guarded = [
         'uuid'
     ];
+
+    public function averageScore()
+    {
+        return round($this->reviews()->average('score'), 1);
+    }
+
+    public function averageActiveScore()
+    {
+        return round($this->reviews()->isActive()->average('score'), 1);
+    }
 
     public function users(): BelongsToMany
     {

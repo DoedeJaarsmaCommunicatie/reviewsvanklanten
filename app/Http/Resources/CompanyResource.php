@@ -26,8 +26,10 @@ class CompanyResource extends JsonResource
             'uuid' => $this->uuid,
             'description' => $this->when((bool) $this->description, $this->description),
             $this->mergeWhen($this->reviews()->count() > 0, [
-                'reviews' => $this->reviews,
+                'reviews' => $this->reviews()->isActive()->get(),
                 'review_count' => $this->reviews()->count(),
+                'positive_average' => $this->averageActiveScore(),
+                'average' => $this->averageScore(),
             ]),
         ];
     }

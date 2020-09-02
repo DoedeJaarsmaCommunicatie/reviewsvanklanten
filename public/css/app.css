@@ -644,6 +644,41 @@ table.striped tr:nth-of-type(even), table.striped thead {
   --bg-opacity: 0.25;
 }
 
+.text-control {
+  display: block;
+}
+
+.text-control label {
+  display: block;
+}
+
+.text-control input {
+  display: block;
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #000;
+  border-color: rgba(0, 0, 0, var(--border-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.text-control label + input {
+  margin-top: 0.5rem;
+}
+
+.text-control small {
+  --text-opacity: 1;
+  color: #2d3748;
+  color: rgba(45, 55, 72, var(--text-opacity));
+}
+
+.text-control + button {
+  margin-top: 0.5rem;
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));

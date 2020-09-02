@@ -6,6 +6,7 @@ use Eloquent;
 use App\Models\Company;
 use Laravel\Cashier\Billable;
 use Illuminate\Support\Carbon;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -71,11 +72,14 @@ use Laravel\Cashier\Order\Contracts\ProvidesInvoiceInformation;
  * @method static Builder|User whereTaxPercentage($value)
  * @method static Builder|User whereTrialEndsAt($value)
  * @method static Builder|User whereZipcode($value)
+ * @property-read Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read int|null $tokens_count
  */
 class User extends Authenticatable implements MustVerifyEmail, ProvidesInvoiceInformation
 {
     use Notifiable;
     use Billable;
+    use HasApiTokens;
 
     public const T_B_BASIC_YEARLY = 'basic-yearly';
     public const T_B_PLUS_YEARLY = 'plus-yearly';

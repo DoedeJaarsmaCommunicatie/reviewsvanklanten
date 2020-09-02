@@ -24,3 +24,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('subscriptions')->group(static function() {
     Route::post('/subscribe', 'Web\Subscribe\NewSubscription@index')->name('subscriptions.new');
 });
+
+
+Route::prefix('dashboard')->group(static function() {
+    Route::prefix('tokens')->group(static function () {
+        Route::get('/', 'Web\Dashboard\Users\TokensOverview@index')->name('dashboard.tokens.overview');
+        Route::post('/', 'Web\Dashboard\Users\CreateTokenController@index')->name('dashboard.token.create');
+        Route::delete('/', 'Web\Dashboard\Users\DeleteTokenController@index')->name('dashboard.token.delete');
+    });
+});

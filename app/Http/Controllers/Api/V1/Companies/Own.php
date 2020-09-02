@@ -10,6 +10,8 @@ class Own extends Controller
 {
     public function __invoke()
     {
+        $this->middleware('auth:sanctum');
+
         if (!\Auth::user()) {
             return redirect(route('api.v1.companies.fetch'));
         }

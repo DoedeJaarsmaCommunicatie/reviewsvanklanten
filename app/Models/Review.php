@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -40,9 +41,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Review whereReviewableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Review whereReviewableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Review whereStatus($value)
+ * @method static Builder|Review isActive()
+ * @method static Builder|Review isHidden()
  */
 class Review extends Model
 {
+    public const T_N_PASSING_GRADE = 6;
+
     protected $fillable = [
         'name',
         'score',
@@ -64,5 +69,20 @@ class Review extends Model
     public function reviewable()
     {
         return $this->morphTo();
+    }
+
+    public function hasPassingGrade(): bool
+    {
+        return $this->score > static::T_N_PASSING_GRADE;
+    }
+
+    public function scopeIsActive(Builder $query)
+    {
+        return $query->where('status', '=', 'active');
+    }
+
+    public function scopeIsHidden(Builder $query)
+    {
+        return $query->where('status', '=', 'on-hold');
     }
 }

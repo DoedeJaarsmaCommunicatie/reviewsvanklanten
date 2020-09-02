@@ -8,7 +8,7 @@
                 Naam
             </th>
             <th>
-                Reviewonderdelen
+                Gemiddelde score
             </th>
         </tr>
     </thead>
@@ -17,7 +17,7 @@
             <tr>
                 <td>{{$company->uuid}}</td>
                 <td>{{$company->name}}</td>
-                <td>{{$company->properties()->count()}}</td>
+                <td>{{$company->averageScore()}}</td>
             </tr>
         @endforeach
     </tbody>
