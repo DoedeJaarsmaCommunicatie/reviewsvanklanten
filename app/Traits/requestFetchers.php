@@ -15,8 +15,19 @@ trait requestFetchers
         return $request->get($key);
     }
 
-    protected function hasRequestKey(Request $request, string $key): bool
+    /**
+     * @param Request $request
+     * @param string|array $key
+     *
+     * @return bool
+     */
+    protected function hasRequestKey(Request $request, $key): bool
     {
-        return $request->has($key);
+        foreach ((array) $key as $item) {
+            if (!$request->has($item)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

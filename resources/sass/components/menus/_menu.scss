@@ -1,0 +1,35 @@
+%menu {
+    @apply block;
+    @apply p-2;
+    @apply shadow;
+    @apply rounded;
+
+    h2 {
+        @apply text-xl;
+    }
+
+    h3 {
+        @apply text-lg;
+        @apply text-gray-800;
+        @apply mb-4;
+    }
+
+    a {
+        @apply block;
+        @apply text-primary-800;
+        @apply underline;
+        @apply transition-all duration-300 ease-in-out;
+
+        &:hover {
+            @apply text-orange-500;
+        }
+    }
+
+    a + h3 {
+        @apply mt-4;
+    }
+}
+
+.nav-menu {
+    @extend %menu;
+}

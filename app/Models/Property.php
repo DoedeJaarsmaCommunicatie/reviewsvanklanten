@@ -64,8 +64,23 @@ class Property extends Model
         return $this->morphMany(Review::class, 'reviewable');
     }
 
+    /**
+     * @return mixed
+     * @deprecated
+     * @see Property::averageScore()
+     */
     public function averageReview()
     {
         return $this->reviews()->average('score');
+    }
+
+    public function averageScore()
+    {
+        return round($this->reviews()->average('score'), 1);
+    }
+
+    public function averageActiveScore()
+    {
+        return round($this->reviews()->isActive()->average('score'), 1);
     }
 }

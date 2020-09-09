@@ -4,6 +4,7 @@ namespace App;
 
 use Eloquent;
 use App\Models\Company;
+use App\Models\Property;
 use Laravel\Cashier\Billable;
 use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
@@ -154,6 +155,11 @@ class User extends Authenticatable implements MustVerifyEmail, ProvidesInvoiceIn
 
 
         return app()->environment('production') ? false : true; # Return true for testing purposes
+    }
+
+    public function properties()
+    {
+        return $this->hasManyThrough(Property::class, Company::class);
     }
 
     public function companies(): BelongsToMany

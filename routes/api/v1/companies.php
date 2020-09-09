@@ -23,7 +23,7 @@ Route::get('single/{id}', 'Api\\V1\\Companies\\Single')->name('single.id');
 
 Route::prefix('review')->group(static function () {
 //    Route::get('/', '')->name('reviews.fetch');
-    Route::post('/', 'Api\V1\Reviews\Company\CreateReviewController@index')->name('review.create');
+    Route::post('/', 'Api\\V1\\Reviews\\Company\\CreateReviewController@index')->name('review.create');
 
 //    Route::get('/latest', '')->name('review.fetch.latest');
 });

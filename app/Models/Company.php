@@ -56,6 +56,11 @@ class Company extends Model
         return round($this->reviews()->isActive()->average('score'), 1);
     }
 
+    public function latestReviews($limit = 3)
+    {
+        return $this->reviews()->orderByDesc('created_at')->limit($limit)->get();
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);

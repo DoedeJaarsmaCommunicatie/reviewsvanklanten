@@ -679,6 +679,102 @@ table.striped tr:nth-of-type(even), table.striped thead {
   margin-top: 0.5rem;
 }
 
+.nav-menu {
+  display: block;
+  padding: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 0.25rem;
+}
+
+.nav-menu h2 {
+  font-size: 1.25rem;
+}
+
+.nav-menu h3 {
+  font-size: 1.125rem;
+  --text-opacity: 1;
+  color: #2d3748;
+  color: rgba(45, 55, 72, var(--text-opacity));
+  margin-bottom: 1rem;
+}
+
+.nav-menu a {
+  display: block;
+  --text-opacity: 1;
+  color: #55D6BE;
+  color: rgba(85, 214, 190, var(--text-opacity));
+  text-decoration: underline;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-menu a:hover {
+  --text-opacity: 1;
+  color: #ed8936;
+  color: rgba(237, 137, 54, var(--text-opacity));
+}
+
+.nav-menu a + h3 {
+  margin-top: 1rem;
+}
+
+.alert, .alert--info, .alert--error, .alert--success {
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.alert--success {
+  --bg-opacity: 1;
+  background-color: #2f855a;
+  background-color: rgba(47, 133, 90, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #f0fff4;
+  color: rgba(240, 255, 244, var(--text-opacity));
+}
+
+.alert--error {
+  --bg-opacity: 1;
+  background-color: #c53030;
+  background-color: rgba(197, 48, 48, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #fff5f5;
+  color: rgba(255, 245, 245, var(--text-opacity));
+}
+
+.alert--info {
+  --bg-opacity: 1;
+  background-color: #2b6cb0;
+  background-color: rgba(43, 108, 176, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #ebf8ff;
+  color: rgba(235, 248, 255, var(--text-opacity));
+}
+
+.company__reviews--latest .review {
+  display: flex;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.company__reviews--latest .review .score {
+  flex: 0 0 15%;
+}
+
+.company__reviews--latest .review__content {
+  flex: 1 1 auto;
+}
+
+.company__reviews--latest .review:not(:last-of-type) {
+  border-bottom-width: 1px;
+  --border-opacity: 1;
+  border-color: #4a5568;
+  border-color: rgba(74, 85, 104, var(--border-opacity));
+  margin-bottom: 0;
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));

@@ -1,0 +1,9 @@
+%alert {
+    @apply rounded;
+    @apply shadow;
+    @apply p-4 mb-4;
+}
+
+.alert {
+    @extend %alert;
+}

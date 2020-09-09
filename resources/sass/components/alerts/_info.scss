@@ -1,0 +1,8 @@
+@use "base";
+
+.alert--info {
+    @extend .alert;
+
+    @apply bg-blue-700;
+    @apply text-blue-100;
+}

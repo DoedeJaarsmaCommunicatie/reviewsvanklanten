@@ -1,0 +1,8 @@
+@use 'base';
+
+.alert--success {
+    @extend .alert;
+
+    @apply bg-green-700;
+    @apply text-green-100;
+}

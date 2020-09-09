@@ -1,0 +1,22 @@
+.company__reviews {
+    &--latest {
+
+        .review {
+            @apply flex;
+            @apply p-4 mb-4;
+
+            .score {
+                flex: 0 0 15%;
+            }
+
+            &__content {
+                flex: 1 1 auto;
+            }
+
+            &:not(:last-of-type) {
+                @apply border-b border-gray-700;
+                @apply mb-0;
+            }
+        }
+    }
+}

@@ -27,8 +27,8 @@ class PropertyResource extends JsonResource
             'description' => $this->description,
             'reviews' => $this->reviews,
             'review_count' => $this->reviews()->count(),
-            'average_score' => $this->averageReview(),
-            'items' => PropertyResource::collection($this->property),
+            'positive_average' => $this->averageActiveScore(),
+            'average' => $this->averageScore(),
         ];
     }
 
