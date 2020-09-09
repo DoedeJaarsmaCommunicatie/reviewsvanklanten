@@ -40,7 +40,28 @@ Route::prefix('dashboard')->group(static function() {
         Route::prefix('{id}')->where(['id'=> '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'])->group(static function () {
             Route::get('/', 'Web\Dashboard\Companies\SingleController@index')->name('dashboard.companies.single');
             Route::delete('/', 'Web\Dashboard\Companies\DeleteController@fromSingle')->name('dashboard.companies.single.delete');
+
+            Route::prefix('properties')->group(static function () {
+                Route::get('/', 'Web\\Dashboard\\Properties\\OverviewController@index')
+                     ->name('dashboard.properties.overview');
+
+//        Route::post('/', 'Web\\Dashboard\\Properties\\CreateController@index')
+//            ->name('dashboard.property.create');
+
+//        Route::delete('/')
+//            ->name('dashboard.property.delete');
+
+                Route::prefix('{property}')->where(['property' => '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'])->group(static function () {
+//            Route::get('/')
+//                ->name('dashboard.properties.single');
+
+//            route::delete('/')
+//                ->name('dasboard.properties.single.delete');
+                });
+            });
         });
     });
+
+
 });
 

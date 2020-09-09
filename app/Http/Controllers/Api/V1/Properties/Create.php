@@ -23,13 +23,10 @@ class Create extends Controller
     /**
      * @param Request $request
      *
-     * @return PropertyResource
+     * @return PropertyResource|\Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
-        /** @var User $user */
-        $user = $request->user();
-
         $property = new Property();
         $property->uuid = Str::uuid();
         $property->name = $this->getRequestValueOnKey($request, 'name');
@@ -37,6 +34,13 @@ class Create extends Controller
         if ($this->hasRequestKey($request, ['parent_id', 'parent_type'])) {
             $property->parent_type = $this->getParentTypeFromRequest($request);
             $property->parent_id = $this->getRequestValueOnKey($request, 'parent_id');
+        } else {
+            return response()->json(
+                [
+                    'error' => 400,
+                    'message' => 'No parent passed.'
+                ]
+            );
         }
 
         $property->save();
