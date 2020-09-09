@@ -23,7 +23,7 @@ add('writable_dirs', []);
 set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest --ignore-platform-reqs');
 
 // Hosts
-host()
+host('production')
     ->hostname('141.105.127.47')
     ->stage('production')
     ->roles('app')
