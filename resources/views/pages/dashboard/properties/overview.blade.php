@@ -22,7 +22,7 @@
             @includeIf('partials.menu-user')
 
             <main class="lg:w-2/3">
-                @dump($properties)
+                @includeIf('partials.properties.list', [ 'properties' => $properties ])
             </main>
         </section>
     </div>

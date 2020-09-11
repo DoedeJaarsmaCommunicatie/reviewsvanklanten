@@ -17,7 +17,6 @@ class CreateReviewController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
     }
 
     public function index(Request $request)
@@ -55,6 +54,15 @@ class CreateReviewController extends Controller
         }
 
         $review->save();
+
+        if ($this->hasRequestKey($request, 'redirect_url')) {
+            return redirect($this->getRequestValueOnKey($request, 'redirect_url'))
+                ->withHeaders(
+                [
+                    'X-'
+                ]
+            );
+        }
 
         return PropertyResource::make(Property::whereUuid($this->getRequestValueOnKey($request, 'property'))->first());
     }

@@ -25,18 +25,27 @@ class PropertyResource extends JsonResource
             'uuid' => $this->uuid,
             'name' => $this->name,
             'description' => $this->description,
-            'reviews' => $this->reviews,
+            'reviews' => $this->reviews()->orderBy('created_at', 'desc')->get(),
             'review_count' => $this->reviews()->count(),
             'positive_average' => $this->averageActiveScore(),
             'average' => $this->averageScore(),
         ];
     }
 
-    public function with($request)
+    public function with($request): array
     {
         return [
             'related' => [
                 'items' => PropertyResource::collection($this->property),
+            ],
+            'links' => [
+                'self' => route('api.v1.properties.single.id', $this->id),
+                'overview' => route('api.v1.properties.fetch'),
+                'create' => route('api.v1.properties.create'),
+                'reviews' => [
+                    'create' => route('api.v1.properties.review.create'),
+                    'fetch' => '',
+                ],
             ]
         ];
     }
