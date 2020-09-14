@@ -42,6 +42,8 @@ class Users extends Command
         $user->city = $this->ask('City');
         $user->phone  = $this->ask('Phone');
 
+        $user->flags = [];
+
         $this->table(['name', 'email'], [[$user->name, $user->email]]);
 
         $this->table(['address', 'zipcode', 'city', 'phone'], [[$user->address, $user->zipcode, $user->city, $user->phone]]);
