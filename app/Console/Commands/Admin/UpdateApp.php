@@ -52,8 +52,12 @@ class UpdateApp extends Command
             $this->line('Updating to version: '. $versionAvailable);
             $release = $this->updater->source()->fetch($versionAvailable);
 
-//            $this->updater->source()->update($release);
+            if (app()->environment('production', 'prod')) {
+                $this->updater->source()->update($release);
+            }
             \Artisan::call('admin:update-env SELF_UPDATER_VERSION_INSTALLED ' . $versionAvailable);
+            \Artisan::call('admin:migrate-database');
+
             $this->line('Updated to version: '. $versionAvailable);
             return 0;
         }

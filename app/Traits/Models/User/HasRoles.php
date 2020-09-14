@@ -30,7 +30,7 @@ trait HasRoles
      */
     public function hasFlag($flag): bool
     {
-        return in_array($flag, $this->flags, true);
+        return in_array($flag, $this->flags?? [], true);
     }
 
     /**

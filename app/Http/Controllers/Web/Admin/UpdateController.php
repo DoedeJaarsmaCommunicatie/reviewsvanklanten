@@ -21,6 +21,7 @@ class UpdateController extends Controller
 
     public function index()
     {
+        $this->authorize('view-new-version');
         $version_installed = $this->manager->source()->getVersionInstalled();
         $has_update = $this->manager->source()->isNewVersionAvailable($version_installed);
         $new_version = $this->manager->source()->getVersionAvailable();
@@ -37,6 +38,8 @@ class UpdateController extends Controller
 
     public function update(Request $request)
     {
+        $this->authorize('update-app-version');
+
         if ($this->hasRequestKey($request, 'user')) {
             $user = decrypt($this->getRequestValueOnKey($request, 'user'));
 

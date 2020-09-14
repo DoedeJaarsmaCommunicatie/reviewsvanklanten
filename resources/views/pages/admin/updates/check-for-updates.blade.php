@@ -15,7 +15,7 @@
                     <h1>Updates</h1>
                 @endif
 
-                @if ($has_update)
+                @if ($has_update && \Auth::user()->can('update-app-version'))
                     <form method="POST" action="{{ route('admin.update') }}">
                         <h2>
                             Updaten van versie {{ $current_version }} naar versie {{ $new_version }}
