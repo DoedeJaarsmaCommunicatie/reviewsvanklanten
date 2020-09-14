@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Policies\Admin\UpdatePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +26,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $this->registerUpdatePolicies();
+    }
+
+    protected function registerUpdatePolicies()
+    {
+        Gate::define('view-new-version', [UpdatePolicy::class, 'checkVersion']);
+        Gate::define('update-app-version', [UpdatePolicy::class, 'updateApp']);
     }
 }

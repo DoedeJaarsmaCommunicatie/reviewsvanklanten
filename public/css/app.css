@@ -618,6 +618,46 @@ video {
   }
 }
 
+.content {
+  font-family: Rubik;
+}
+
+.content h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.content h4 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.content h5 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.content a {
+  text-decoration: underline;
+  --text-opacity: 1;
+  color: #7CEA9C;
+  color: rgba(124, 234, 156, var(--text-opacity));
+}
+
 .pill {
   padding-left: 1rem;
   padding-right: 1rem;

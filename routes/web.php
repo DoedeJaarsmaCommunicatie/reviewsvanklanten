@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Admin\UpdateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +62,14 @@ Route::prefix('dashboard')->group(static function() {
             });
         });
     });
-
-
 });
 
+Route::prefix('admin')->group(static function () {
+    Route::prefix('updates')->group(static function () {
+        Route::get('/', [UpdateController::class, 'index'])
+            ->name('admin.updates.get');
+
+        Route::post('/', [UpdateController::class, 'update'])
+            ->name('admin.update');
+    });
+});

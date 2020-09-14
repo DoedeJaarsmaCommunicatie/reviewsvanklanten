@@ -11,4 +11,8 @@
 
     <h3>Instellingen</h3>
     <a href="{{ route('dashboard.tokens.overview') }}">Tokens</a>
+
+    @can('view-new-version')
+        <a href="{{ route('admin.updates.get') }}">Updates</a>
+    @endcan
 </nav>

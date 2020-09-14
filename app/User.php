@@ -8,6 +8,7 @@ use App\Models\Property;
 use Laravel\Cashier\Billable;
 use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
+use App\Traits\Models\User\HasRoles;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -75,12 +76,19 @@ use Laravel\Cashier\Order\Contracts\ProvidesInvoiceInformation;
  * @method static Builder|User whereZipcode($value)
  * @property-read Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
+ * @property string $role
+ * @property array $flags
+ * @property-read Collection|Property[] $properties
+ * @property-read int|null $properties_count
+ * @method static Builder|User whereFlags($value)
+ * @method static Builder|User whereRole($value)
  */
 class User extends Authenticatable implements MustVerifyEmail, ProvidesInvoiceInformation
 {
     use Notifiable;
     use Billable;
     use HasApiTokens;
+    use HasRoles;
 
     public const T_B_BASIC_YEARLY = 'basic-yearly';
     public const T_B_PLUS_YEARLY = 'plus-yearly';
@@ -113,6 +121,7 @@ class User extends Authenticatable implements MustVerifyEmail, ProvidesInvoiceIn
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'flags' => 'array',
     ];
 
     /**
@@ -152,7 +161,6 @@ class User extends Authenticatable implements MustVerifyEmail, ProvidesInvoiceIn
 
             return $total < 250;
         }
-
 
         return app()->environment('production') ? false : true; # Return true for testing purposes
     }
