@@ -28,7 +28,7 @@ class RunDatabaseMigrations extends Command
      */
     public function handle()
     {
-        \Artisan::call('migrate');
+        \Artisan::call('migrate --env=dev');
         return 0;
     }
 }
