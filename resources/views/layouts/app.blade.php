@@ -33,7 +33,7 @@
             @endguest
 
             @auth
-                <a href="{{ route('logout') }}" onclick="e => e.preventDefault; document.getElementById('logout-form').submit();">
+                <a href="{{ route('logout') }}" onclick="event => event.preventDefault; document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
