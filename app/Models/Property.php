@@ -65,6 +65,18 @@ class Property extends Model
     }
 
     /**
+     * @return Company|\Eloquent|Model
+     */
+    public function company()
+    {
+        if (!$this->parent_type === Company::class) {
+            return $this->parent->parent();
+        }
+
+        return $this->parent;
+    }
+
+    /**
      * @return mixed
      * @deprecated
      * @see Property::averageScore()

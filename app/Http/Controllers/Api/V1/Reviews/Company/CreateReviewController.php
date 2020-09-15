@@ -22,7 +22,7 @@ class CreateReviewController extends Controller
 
     public function index(Request $request)
     {
-        $this->validateRequest($request); # Now we can assume the fields we need are there.
+        $this->validateRequest($request);
 
         $review = new Review();
         $review->uuid = Str::uuid();

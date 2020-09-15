@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Invitation;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\UpdateController;
 
@@ -61,6 +62,43 @@ Route::prefix('dashboard')->group(static function() {
                 });
             });
         });
+    });
+});
+
+Route::prefix('mail-test')->group(static function () {
+    Route::get('/invitation/company', static function () {
+        $invitation = Invitation::notSent()->maybeSendToday()->first();
+
+        return new \App\Mail\Invitations\CompanyInvitation($invitation);
+    });
+
+    Route::get('/invitation/properties', static function () {
+        $invitation = Invitation::notSent()->maybeSendToday()->get()[1];
+
+        return new \App\Mail\Invitations\PropertyInvitation($invitation);
+    });
+});
+
+Route::prefix('guest')->group(static function () {
+    Route::prefix('review')->group(static function () {
+        Route::get('company/{id}', [\App\Http\Controllers\Web\Guests\Reviews\Post\CreateCompanyReview::class, 'showForm'])
+            ->name('guest.review.company');
+
+        Route::post('company/{id}', [\App\Http\Controllers\Web\Guests\Reviews\Post\CreateCompanyReview::class, 'storeInvitation'])
+            ->name('guest.review.company.create');
+
+        Route::match(['GET', 'POST'],'company/quick/{id}', [ \App\Http\Controllers\Web\Guests\Reviews\Post\CreateCompanyReview::class, 'quickReview'])
+             ->name('guest.review.company.create.quick');
+
+
+        Route::get('property/{id}', [\App\Http\Controllers\Web\Guests\Reviews\Post\CreatePropertyReview::class, 'showForm'])
+             ->name('guest.review.property');
+
+        Route::post('property/{id}', [\App\Http\Controllers\Web\Guests\Reviews\Post\CreatePropertyReview::class, 'storeInvitation'])
+             ->name('guest.review.property.create');
+
+        Route::match(['GET', 'POST'],'property/quick/{id}', [ \App\Http\Controllers\Web\Guests\Reviews\Post\CreatePropertyReview::class, 'quickReview'])
+             ->name('guest.review.property.create.quick');
     });
 });
 
