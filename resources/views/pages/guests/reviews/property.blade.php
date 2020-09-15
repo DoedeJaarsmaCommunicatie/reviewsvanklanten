@@ -11,9 +11,9 @@
         <section class="lg:flex ">
             <main class="lg:w-2/3 content">
                 <h1>
-                    Plaats een review voor {{ $company->name }}
+                    Plaats een review voor {{ $property->name }}
                 </h1>
-                <form method="POST" action="{{ route('guest.review.company', [ 'id' => $company->uuid ]) }}">
+                <form method="POST" action="{{ route('guest.review.property', [ 'id' => $property->uuid ]) }}">
                     @csrf
                     @method('POST')
                     <div class="text-control">

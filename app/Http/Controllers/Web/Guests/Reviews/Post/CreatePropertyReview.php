@@ -26,7 +26,7 @@ class CreatePropertyReview extends Controller
             $email = $this->getRequestValueOnKey($request, 'email');
         }
 
-        return \View::make('pages.guests.reviews.company')
+        return \View::make('pages.guests.reviews.property')
                     ->with(
                         [
                             'property' => Property::whereUuid($id)->firstOrFail(),
