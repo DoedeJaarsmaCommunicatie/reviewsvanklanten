@@ -10,6 +10,10 @@
         @apply border border-black;
         @apply px-4 py-2;
         @apply rounded;
+
+        &.invalid {
+            @apply border-tertiary;
+        }
     }
 
     label + input {

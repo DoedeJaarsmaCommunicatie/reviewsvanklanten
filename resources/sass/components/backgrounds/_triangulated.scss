@@ -1,0 +1,23 @@
+.cool-bg-triangle {
+    @apply relative;
+
+    &::after {
+        @apply bg-primary-800;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        content: " ";
+        -webkit-clip-path: polygon(0 60px,0 100%,100% 100%,100% 0);
+        clip-path: polygon(0 60px,0 100%,100% 100%,100% 0);
+        z-index: 1;
+        pointer-events: none;
+
+        @screen lg {
+            height: 60px;
+            -webkit-clip-path: polygon(0 120px,0 100%,100% 100%,100% 0);
+            clip-path: polygon(0 120px,0 100%,100% 100%,100% 0);
+        }
+    }
+}
